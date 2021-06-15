@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국영상자료원</title>
+    <link href="css2/style_jq.css" rel="stylesheet" type="text/css">
+    <link href="css2/flickerplate.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css2/slick.css">
+    <link rel="stylesheet" type="text/css" href="css2/slick-theme.css">
+
+    <!--jq메뉴버튼 링크 시작-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            mobile_menu();
+        });
+
+        function mobile_menu() {
+            /* 변수 선언 */
+            var $menu = null;
+            var $left_gnb = null; // 영역 전체
+            var $depth1_wrap = null;
+            var $depth1 = null;
+            var $depth1_btn = null;
+
+            /* 시작 함수 */
+            function start() {
+                init();
+                init_event();
+            }
+            /* 변수 초기화 함수 */
+            function init() {
+                $menu = $('.menu');
+                $left_gnb = $('.left_gnbWrap'); // 영역 전체
+                $depth1_wrap = $('.left_gnb>li');
+                $depth1 = $depth1_wrap.children('ul');
+                $depth1_btn = $depth1_wrap.children('a');
+            }
+            /* 이벤트 함수 */
+            function init_event() {
+
+                /* 모바일 메뉴 버튼 클릭했을때 모바일 메뉴영역 나오게 하기 */
+                $menu.click(function(event) {
+                    event.preventDefault();
+                    $left_gnb.addClass('on');
+                });
+
+                /* x버튼 눌렀을때 모바일 메뉴 닫기 */
+                $('.close').click(function(event) {
+                    event.preventDefault();
+
+                    $left_gnb.removeClass('on');
+
+                    // x버튼 누르면 시간차 약간두고 소메뉴 닫히게 하기
+                    setTimeout(function() {
+                        $depth1_btn.removeClass('on');
+                        $depth1.slideUp();
+                    }, 300)
+                });
+
+                /* depth1의 각메뉴 클릭시 depth2 나오게 하기 */
+                $depth1_btn.click(function(event) {
+                    event.preventDefault();
+                    var $this = $(this);
+                    var $this_ul = $this.siblings('ul');
+
+                    var check = $this.hasClass('on');
+                    if (check) {
+                        $this.removeClass('on');
+                        $this_ul.stop(true, true).slideUp();
+                    } else {
+                        $depth1_btn.removeClass('on');
+                        $depth1.stop().slideUp();
+                        $this.addClass('on');
+                        $this_ul.stop(true, true).slideDown();
+                    }
+                });
+
+                /* 디바이스 크기 변경시 모바일 메뉴영역 숨기기 */
+                $(window).resize(function() {
+                    $left_gnb.removeClass('on');
+                });
+            }
+
+            start(); // 시작 호출
+        }
+
+    </script>
+    <!--jq메뉴버튼 링크 끝-->
+
+    <script src="js/jquery-v1.10.2.min.js" type="text/javascript"></script>
+    <script src="js/jquery-finger-v0.1.0.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function() {
+
+            $('.flicker-example').flicker();
+        });
+
+    </script>
+
+</head>
+
+<body>
+    <div class="wrap">
+        <header id="header">
+            <div class="top_header">
+                <div class="inner">
+                    <ul class="site">
+                        <li><a href="sub.html">상영일정</a></li>
+                        <li><a href="sub.html">프로그램</a></li>
+                        <li><a href="sub.html">이용안내</a></li>
+                        <!--after-->
+                    </ul>
+                    <ul class="util">
+                        <li><a href="sub.html">로그인</a></li>
+                        <li><a href="sub.html">회원가입</a></li>
+                        <li><a href="sub.html">기관소개</a></li>
+                        <li><a href="sub.html">ENGLISH</a></li>
+                        <!--after-->
+                    </ul>
+                    <!--after-->
+                </div>
+            </div>
+            <div class="bottom_header">
+                <div class="inner">
+                    <div class="menu">
+                        <i>
+                            <a href="sub.html"><img src="img/top_menu.png" alt="메뉴"></a>
+                        </i>
+                    </div>
+                    <div class="logo">
+                        <i>
+                            <a href="index.html"><img src="img/logo.png" alt="로고"></a>
+                        </i>
+                    </div>
+                    <div class="today">
+                        <div>
+                            <i>
+                                <img src="img/today.png" alt="시계">
+                            </i>
+                            TODAY
+                        </div>
+                        <p>
+                            <span>시네마테크 KOFA</span> 휴관일입니다.
+                        </p>
+                        <p class="m_today">
+                            휴관일
+                        </p>
+                    </div>
+                    <!--after-->
+                </div>
+            </div>
+
+            <!--jq메뉴버튼 시작-->
+
+            <nav class="left_gnbWrap">
+                <a href="#" class="close">
+                    <img src="img/btn_fixClose.png" alt="">
+                </a>
+                <ul class="left_gnb">
+                    <li>
+                        <a href="#">시네마테크KOFA</a>
+                        <ul>
+                            <li><a href="sub.html">상영일정</a></li>
+                            <li><a href="#">프로그램</a></li>
+                            <li><a href="#">이용안내</a></li>
+                            <li><a href="#">뉴스/공지</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">영상도서관</a>
+                        <ul>
+                            <li><a href="#">자료검색</a></li>
+                            <li><a href="#">컬렉션</a></li>
+                            <li><a href="#">디렉토리</a></li>
+                            <li><a href="#">희망자료신청</a></li>
+                            <li><a href="#">다인감상실</a></li>
+                            <li><a href="#">이용안내</a></li>
+                            <li><a href="#">뉴스/공지</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">한국영화박물관</a>
+                        <ul>
+                            <li><a href="#">전시</a></li>
+                            <li><a href="#">교육</a></li>
+                            <li><a href="#">영화관 옆 박물관</a></li>
+                            <li><a href="#">이용안내</a></li>
+                            <li><a href="#">뉴스/공지</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">KOFA 컬렉션</a>
+                    </li>
+                    <li>
+                        <a href="#">고객서비스</a>
+                        <ul>
+                            <li><a href="#">체출/위탁/기증</a></li>
+                            <li><a href="#">자료이용</a></li>
+                            <li><a href="#">시설이용</a></li>
+                            <li><a href="#">온라인민원</a></li>
+                            <li><a href="#">고객만족경영</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">기관소개</a>
+                        <ul>
+                            <li><a href="#">소개</a></li>
+                            <li><a href="#">시설안내</a></li>
+                            <li><a href="#">발간물</a></li>
+                            <li><a href="#">기관소식</a></li>
+                            <li><a href="#">채널안내</a></li>
+                            <li><a href="#">사회적가치</a></li>
+                            <li><a href="#">경영공시</a></li>
+                            <li><a href="#">정보공개</a></li>
+                        </ul>
+                    <li>
+                        <a href="#">KMDb</a>
+                        <ul>
+                            <li><a href="#">VOD</a></li>
+                            <li><a href="#">영화글</a></li>
+                            <li><a href="#">사료관</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <!--jq메뉴버튼 끝-->
+
+        </header>
+
+
+        <article id="mainimg">
+            <h1 class="hidden">메인이미지</h1>
+
+            <div class="flicker-example" data-block-text="false">
+                <ul>
+                    <li>
+                    </li>
+
+                    <li>
+                    </li>
+
+                    <li>
+                    </li>
+
+                    <li>
+                    </li>
+                </ul>
+            </div>
+
+            <!--<div class="m_bg"></div>
+            <div class="m_mimg"></div>
+            <div class="main_text">
+                <h4>KMDb VOD</h4>
+                <h1>
+                    4월의<br>
+                    VOD 초이스
+                </h1>
+                <div class="mainimg_btn">VIEW</div>
+            </div>-->
+        </article>
+
+
+        <main id="contents">
+            <!--section1-->
+            <section class="s1">
+                <div class="inner">
+                    <div class="s1_title">
+                        <h2>시네마테크KOFA 이용안내</h2>
+                    </div>
+
+                    <section class="regular slider">
+                        <div>
+                            <img src="img/card1.png">
+                            <!--<img src="http://placehold.it/350x300?text=1">-->
+                        </div>
+                        <div>
+                            <img src="img/card2.png">
+                            <!--<img src="http://placehold.it/350x300?text=2">-->
+                        </div>
+                        <div>
+                            <img src="img/card3.png">
+                            <!--<img src="http://placehold.it/350x300?text=3">-->
+                        </div>
+                        <div>
+                            <img src="img/card4.jpg" width="310" height="482">
+                            <!--<img src="http://placehold.it/350x300?text=4">-->
+                        </div>
+                        <div>
+                            <img src="img/card5.jpg" width="310" height="482">
+                            <!--<img src="http://placehold.it/350x300?text=5">-->
+                        </div>
+                        <div>
+                            <img src="img/card6.jpg" width="310" height="482">
+                            <!--<img src="http://placehold.it/350x300?text=6">-->
+                        </div>
+                    </section>
+
+                    <!--<div class="card_set">
+                        <div class="m_btn_prev">
+                            <img src="img/prev.png" alt="이전">
+                        </div>
+                        <div class="card">
+                            <img src="img/card1.png" alt="사랑방 손님과 어머니">
+                        </div>
+                        <div class="m_btn_next">
+                            <img src="img/next.jpg" alt="다음">
+                        </div>
+                        <div class="card">
+                            <img src="img/card2.png" alt="영상도서관 사서가 제안하는 이달의 영화">
+                        </div>
+                        <div class="card">
+                            <img src="img/card3.png" alt="2019년 사사로운 영화리스트">
+                        </div>
+                        after
+                    </div>-->
+                </div>
+            </section>
+
+
+            <!--section2-->
+            <section class="s2">
+                <div class="inner">
+                    <div class="sb_text">
+                        <p>
+                            한국고전영화를 관람할 수 있는 곳
+                        </p>
+                        <h4>
+                            한국고전영화극장
+                        </h4>
+                    </div>
+                    <div class="channel">
+                        <div class="youtube">
+                            <i>
+                                <img src="img/youtube.png" alt="유튜브">
+                            </i>
+                            <p>
+                                유튜브 채널 바로가기
+                            </p>
+                        </div>
+                        <div class="naver">
+                            <i>
+                                <img src="img/naver.png" alt="네이버">
+                            </i>
+                            <p>
+                                네이버 채널 바로가기
+                            </p>
+                        </div>
+                    </div>
+                    <div class="sns_set">
+                        <h3>한국영상자료원 외부채널</h3>
+                        <i>
+                            <img src="img/sns_set.png" alt="sns">
+                        </i>
+                    </div>
+                    <!--after-->
+                </div>
+            </section>
+
+
+            <!--section3-->
+            <section class="s3">
+                <h2>영화 정보가 궁금하다면?</h2>
+                <div class="search_box">
+                    <p>
+
+                        <input type="radio" checked name="gender"><span>영상도서관</span>
+                    <p>
+                    <p class="kmdb">
+
+                        <input type="radio" name="gender"><span>KMDb</span>
+                    <p>
+                        <i class="search">
+                            <input type="text">
+                        </i>
+
+                </div>
+            </section>
+
+
+            <!--section4-->
+            <section class="s4">
+                <div class="inner">
+                    <h2>한국영화데이터베이스 KMDb</h2>
+
+                    <section class="center slider2">
+                        <div>
+                            <img src="img/poster_jq1.jpg">
+                            <!--<img src="http://placehold.it/350x300?text=1">-->
+                        </div>
+                        <div>
+                            <img src="img/poster_jq2.jpg">
+                            <!--<img src="http://placehold.it/350x300?text=2">-->
+                        </div>
+                        <div>
+                            <img src="img/poster_jq3.jpg">
+                            <!--<img src="http://placehold.it/350x300?text=3">-->
+                        </div>
+                        <div>
+                            <img src="img/poster_jq4.jpg">
+                            <!--<img src="http://placehold.it/350x300?text=4">-->
+                        </div>
+                        <div>
+                            <img src="img/poster_jq5.jpg">
+                            <!--<img src="http://placehold.it/350x300?text=5">-->
+                        </div>
+                        <div>
+                            <img src="img/poster_jq6.jpg">
+                            <!--<img src="http://placehold.it/350x300?text=6">-->
+                        </div>
+                        <div>
+                            <img src="img/poster_jq7.jpg">
+                            <!--<img src="http://placehold.it/350x300?text=7">-->
+                        </div>
+                        <div>
+                            <img src="img/poster_jq8.jpg">
+                            <!--<img src="http://placehold.it/350x300?text=8">-->
+                        </div>
+                        <div>
+                            <img src="img/poster_jq9.jpg">
+                            <!--<img src="http://placehold.it/350x300?text=9">-->
+                        </div>
+                    </section>
+
+                    <!--<div class="poster_set">
+                        <div class="btn_prev">
+                            <img src="img/prev.png" alt="이전">
+                        </div>
+                        <div class="poster">
+                            <i>
+                                <img src="img/poster1.png" alt="너의 새는 노래할 수 있어">
+                            </i>
+                            <p>
+                                <span>사사로운 영화리스트</span><br>
+                                너의 새는 노래할 수<br>
+                                있어
+                            </p>
+                        </div>
+                        <div class="poster">
+                            <i>
+                                <img src="img/poster2.png" alt="제6예술의 탄생이라는 선언문을 발표하다">
+                            </i>
+                            <p>
+                                <span>세계영화사의 순간들</span><br>
+                                제6예술의 탄생이라는<br>
+                                선언문을 발표하다
+                            </p>
+                        </div>
+                        <div class="poster">
+                            <i>
+                                <img src="img/poster3.png" alt="나랏말싸미">
+                            </i>
+                            <p>
+                                <span>초이스</span><br>
+                                나랏말싸미<br>
+                                (2019)
+                            </p>
+                        </div>
+                        after
+                        <div class="btn_next">
+                            <img src="img/next.jpg" alt="다음">
+                        </div>
+                    </div>-->
+                </div>
+            </section>
+
+
+            <!--section5-->
+            <section class="s5">
+
+                <h2>기관소식 더 보기</h2>
+                <div class="icon_set">
+                    <ul>
+                        <li>
+                            <i>
+                                <img src="img/icon1.png" alt="공지사항">
+                            </i>
+                            <p>공지사항</p>
+                        </li>
+                        <li>
+                            <i>
+                                <img src="img/icon2.png" alt="뉴스레터">
+                            </i>
+                            <p>뉴스레터</p>
+                        </li>
+                        <li>
+                            <i>
+                                <img src="img/icon3.png" alt="도서관">
+                            </i>
+                            <p>도서관</p>
+                        </li>
+                        <li>
+                            <i>
+                                <img src="img/icon4.png" alt="박물관">
+                            </i>
+                            <p>박물관</p>
+                        </li>
+                    </ul>
+                </div>
+
+            </section>
+
+
+            <!--section6-->
+            <section class="s6">
+                <div class="m_poster">
+                    <ul>
+                        <li class="m_poster_l">
+                            <p>
+                                <br>
+                                <br>
+                                <br>
+                            </p>
+                            <i>
+                                <img src="img/m_poster_left.png" alt="왼쪽끝 이미지">
+                            </i>
+                        </li>
+                        <li class="m_poster_c">
+                            사사로운영화리스트
+                            <p>
+                                ＜바쿠라우＞
+                            </p>
+                            <p>
+                                (2019)
+                            </p>
+                            <i>
+                                <img src="img/m_poster1.png" alt="바쿠라우">
+                            </i>
+                        </li>
+                        <li class="m_poster_c">
+                            초이스
+                            <p>
+                                ＜지푸라기라도 잡고
+                            </p>
+                            <p>
+                                싶은짐승들＞ (2020)
+                            </p>
+                            <i>
+                                <img src="img/m_poster2.png" alt="지푸라기라도 잡고싶은 짐승들">
+                            </i>
+                        </li>
+                        <li class="m_poster_c">
+                            사사로운영화리스트
+                            <p>
+                                ＜미나리＞
+                            </p>
+                            <p>
+                                (2020)
+                            </p>
+                            <i>
+                                <img src="img/m_poster3.png" alt="미나리">
+                            </i>
+                        </li>
+                        <li class="m_poster_c">
+                            사사로운영화리스트
+                            <p>
+                                ＜그대 너머에＞
+                            </p>
+                            <p>
+                                (2020)
+                            </p>
+                            <i>
+                                <img src="img/m_poster4.png" alt="그대 너머에">
+                            </i>
+                        </li>
+                        <li class="m_poster_c">
+                            사사로운영화리스트
+                            <p>
+                                ＜스파이의 아내＞
+                            </p>
+                            <p>
+                                (2020)
+                            </p>
+                            <i>
+                                <img src="img/m_poster5.png" alt="스파이의 아내">
+                            </i>
+                        </li>
+                        <li class="m_poster_c">
+                            세계영화사의 순간들
+                            <p>
+                                ＜자빠지기><br>
+                                <br>
+                            </p>
+                            <p></p>
+                            <i>
+                                <img src="img/m_poster6.png" alt="자빠지기">
+                            </i>
+                        </li>
+                        <li class="m_poster_c">
+                            칼럼
+                            <p>
+                                ＜정민김의 집은
+                            </p>
+                            <p>
+                                어디인가?＞
+                            </p>
+                            <i>
+                                <img src="img/m_poster7.png" alt="정민김의 집은 어디인가">
+                            </i>
+                        </li>
+                        <li class="m_poster_r">
+                            <p>
+                                <br>
+                                <br>
+                                <br>
+                            </p>
+                            <i>
+                                <img src="img/m_poster_right.png" alt="오른쪽끝 이미지">
+                            </i>
+                        </li>
+                        <!--after-->
+                    </ul>
+                </div>
+            </section>
+
+
+            <!--section7-->
+            <section class="s7">
+                <i>
+                    <img src="img/f_banner.png" alt="배너">
+                </i>
+            </section>
+        </main>
+
+
+        <footer id="footer">
+            <div class="f_site">
+                <p>
+                    FAMILY SITE
+                </p>
+            </div>
+            <div class="inner">
+                <div class="f_left">
+                    <div>
+                        <img src="img/logo.png" alt="푸터로고">
+                    </div>
+                    <div>
+                        <img src="img/19.png" alt="코로나바이러스감염증">
+                    </div>
+                </div>
+
+
+                <div class="f_cen">
+                    <ul>
+                        <li>
+                            <span class="bold">개인정보처리방침</span>
+                            1:1문의
+                        </li>
+                        <li>
+                            <span>저작권정책</span>
+                            오시는 길
+                        </li>
+                        <li>
+                            <span>고객만족현장</span>
+                            사이트맵
+                        </li>
+                        <li>
+                            <span> FIAF 선언</span>
+                            뷰어 다운로드
+                        </li>
+                    </ul>
+                    <div class="f_cen_banner">
+                        <ul>
+                            <li>
+                                <i>
+                                    <img src="img/f_banner1.png" alt="OPEN">
+                                </i>
+                            </li>
+                            <li>
+                                <i>
+                                    <img src="img/f_banner2.png" alt="디지털유산어워드">
+                                </i>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="f_right">
+                    <h4>본원</h4>
+                    <p>
+                        서울시 마포구 월드컵북로 4004 한국영상자료원 (우 03925)<br>
+                        <span>전화:02)3153-2001 팩스:02)3153-20180</span>
+                    </p>
+                    <h4>파주</h4>
+                    <p>
+                        경기도 파주시 문발로 301 (우 10881)<br>
+                        <span>전화:031)830-8100</span>
+                    </p>
+                    <p class="copyright">
+                        kofa@koreafilm.oi.kr<br>
+                        ⓒ Korean Film Archive. All Rights Reserved
+                    </p>
+                </div>
+                <!--after-->
+                <div class="m_footer">
+                    <p>
+                        <span class="bold">개인정보처리방침</span>
+                        　저작권정책　고객만족현장　FIAF　선언
+                    </p>
+                    <p>
+                        1:1문의 　오시는 길　사이트맵　뷰어 다운로드
+                    </p>
+                    <p>
+                        <span class="bold">본원:</span>
+                        서울시 마포구 월드컵북로 4004 한국영상자료원 (우 03925)
+                        　|　전화:02)3153-2001　팩스:02)3153-20180
+                    </p>
+                    <p>
+                        <span class="bold">파주:</span>
+                        경기도 파주시 문발로 301 (우 10881)
+                        　|　전화:031)830-8100
+                    </p>
+
+                    <i class="m_banner">
+                        <img src="img/f_banner.png" alt="배너">
+                    </i>
+                </div>
+                <div class="m_copy">
+                    kofa@koreafilm.oi.kr ⓒ Korean Film Archive. All Rights Reserved
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+    <script src="js/slick.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+        var j220 = jQuery.noConflict();
+
+    </script>
+    <script type="text/javascript">
+        j220(document).on('ready', function() {
+
+            j220(".regular").slick({
+                dots: true,
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 3,
+
+                responsive: [ // 반응형 웹 구현 옵션
+                    {
+                        breakpoint: 1279, //화면 사이즈 1279px
+                        settings: {
+                            //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 768, //화면 사이즈 768px
+                        settings: {
+                            //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+            j220(".center").slick({
+                dots: true,
+                infinite: true,
+                centerMode: true,
+                slidesToShow: 3,
+                slidesToScroll: 3,
+                responsive: [ // 반응형 웹 구현 옵션
+                    {
+                        breakpoint: 1279, //화면 사이즈 1279px
+                        settings: {
+                            //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 768, //화면 사이즈 768px
+                        settings: {
+                            //위에 옵션이 디폴트 , 여기에 추가하면 그걸로 변경
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
